@@ -1,40 +1,39 @@
 import React, { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
-import { getStocks } from '../../utils/services';
-import VirtualizedTable from '../ui/table';
-import { stockSymbols } from '../../utils/constants';
-export type StockSymbolType = 'IBM' | 'AAPL' | 'AMD'
+import { getStocks } from '../utils/services';
+import Dropdown from '../components/ui/dropdown';
+import VirtualizedTable from '../components/ui/table';
+import { StockSymbolType } from '../types';
+import TableNoReactWindow from '../components/ui/table-no-react-window';
 
 
-
-
-export default function StockTable() {
+export default function SimpleStockTable() {
     const [data, setData] = useState<any>([]);
     const [selectedSymbol, setSelectedSymbol] = useState<StockSymbolType>('IBM');
     const [loading, setLoading] = useState(true);
     const columns = useMemo(() => [
         {
             dataIndex: 'timestamp',
-            title: 'timestamp',
+            title: 'Timestamp',
         },
         {
             dataIndex: '1. open',
-            title: 'open',
+            title: 'Open',
         },
         {
             dataIndex: '2. high',
-            title: 'high',
+            title: 'High',
         },
         {
             dataIndex: '3. low',
-            title: 'low',
+            title: 'Low',
         },
         {
             dataIndex: '4. close',
-            title: 'close',
+            title: 'Close',
         },
         {
             dataIndex: '5. volume',
-            title: 'volume',
+            title: 'Volume',
         }
     ], []);
 
@@ -52,23 +51,16 @@ export default function StockTable() {
         })()
     }, [selectedSymbol]);
 
-    const handleSymbolChange = (symbol: StockSymbolType) => {
+    const handleSymbolChange = (symbol: string) => {
         setLoading(true);
-        setSelectedSymbol(symbol);
+        setSelectedSymbol(symbol as StockSymbolType);
     }
 
     return (
         <div className={`w-full h-full `} >
-            <div className='my-4'>
-                {stockSymbols.map(symbol => (
-                    <div
-                        className={'inline-block w-20 px-4 text-white rounded-full mx-4 text-center ' + (selectedSymbol === symbol.value ? 'bg-black text-white' : 'text-black')}
-                        onClick={() => { handleSymbolChange(symbol.value) }}
-                    >
-                        {symbol.title}
-                    </div>))}
-            </div>
-            <VirtualizedTable columns={columns} data={defferedValue} className={loading ? 'opacity-50' : 'opacity-100'} />
+            <h1 className='text-2xl font-bold inline-block mx-4'>Time Series (5min) For </h1>
+            <Dropdown defaultValue={'IBM'} options={['IBM', 'AAPL']} onSelect={handleSymbolChange} className='my-4 rounded-md' />
+            <TableNoReactWindow columns={columns} data={defferedValue} className={loading ? 'opacity-50' : 'opacity-100'} height={400} />
         </div>
     )
 }

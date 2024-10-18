@@ -1,5 +1,5 @@
-import { StockSymbolType } from "../components/features/stockTable";
 import { mockResponse } from "../mockResponse";
+import { StockSymbolType } from "../types";
 
 const API_KEY = 'WX3FZ9DG9SBLII2I';
 export async function getStocks({selectedSymbol}: {selectedSymbol: StockSymbolType}) {

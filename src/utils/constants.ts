@@ -1,4 +1,4 @@
-import { StockSymbolType } from "../components/features/stockTable";
+import { StockSymbolType } from "../types";
 
 export const stockSymbols: { title: string; value: StockSymbolType }[] = [
     {
