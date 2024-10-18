@@ -1,9 +1,8 @@
 import React, { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
 import { getStocks } from '../utils/services';
 import Dropdown from '../components/ui/dropdown';
-import VirtualizedTable from '../components/ui/virtualizedTable';
 import { StockSymbolType } from '../types';
-import TableNoReactWindow from '../components/ui/basicTable';
+import BasicTable from '../components/ui/basicTable';
 
 
 export default function SimpleStockTable() {
@@ -62,7 +61,7 @@ export default function SimpleStockTable() {
                 <h1 className='text-2xl font-bold inline-block mx-4'>Time Series (5min) For </h1>
                 <Dropdown defaultValue={'IBM'} options={['IBM', 'AAPL']} onSelect={handleSymbolChange} className='my-4 rounded-md' />
             </div>
-            <TableNoReactWindow columns={columns} data={defferedValue} className={loading ? 'opacity-50' : 'opacity-100'} height={400} />
+            <BasicTable columns={columns} data={defferedValue} className={loading ? 'opacity-50' : 'opacity-100'} height={400} />
         </div>
     )
 }

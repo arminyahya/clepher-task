@@ -15,7 +15,7 @@ interface VirtualizedTableProps {
 const VirtualizedTable: React.FC<VirtualizedTableProps> = ({ data, columns, className }) => {
     const itemCount = data.length;
     const outerListRef = useRef<HTMLElement>(null);
-    const [scrolbarWidth] = useVerticalScrollbarMeasure({ outerListRef: outerListRef.current });
+    const [scrolbarWidth] = useVerticalScrollbarMeasure({ outerListRef: outerListRef });
     const { height, width } = useAutoSizer({ outerListRef: outerListRef.current });
     return (
         <div className={"w-full flex-1 overflow-x-auto bg-white " + className}>
@@ -33,7 +33,6 @@ const VirtualizedTable: React.FC<VirtualizedTableProps> = ({ data, columns, clas
                 itemSize={virtualizedTableRowHeight}
                 width={width}
                 outerRef={outerListRef}
-                className='react-window-list'
 
             >
                 {({ index, style }) => <Row index={index} style={style} data={data} columns={columns} />}

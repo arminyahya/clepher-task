@@ -19,7 +19,7 @@ interface Props {
 function Table(props: Props) {
     const { columns, data, height } = props;
     const outerListRef = useRef<HTMLDivElement>(null);
-    const [scrolbarWidth] = useVerticalScrollbarMeasure({ outerListRef: outerListRef.current });
+    const [scrolbarWidth] = useVerticalScrollbarMeasure({ outerListRef: outerListRef });
     const [currentPage, setCurrentPage] = useState(1);
     const pages = useMemo(() => {
         setCurrentPage(1);

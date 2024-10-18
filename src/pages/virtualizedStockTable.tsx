@@ -59,7 +59,7 @@ export default function VirtualizedStockTable() {
             <div className='w-full h-18'>
                 <h1 className='text-2xl font-bold inline-block mx-4'>Time Series (5min) For </h1>
                 <Dropdown defaultValue={'IBM'} options={['IBM', 'AAPL']} onSelect={handleSymbolChange} className='my-4 rounded-md' />
-            </div>s
+            </div>
             <VirtualizedTable columns={columns} data={defferedValue} className={loading ? 'opacity-50' : 'opacity-100'} />
         </div>
     )
