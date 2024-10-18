@@ -2,29 +2,30 @@ import React, { useEffect, useRef, useState } from 'react';
 import getVerticalScrollbarWidth from '../utils/getVerticalScrollbarWidth';
 
 
-export default function useVerticalScrollbarMeasure({ outerListRef }: { outerListRef: any }) {
+export default function useVerticalScrollbarMeasure({ outerListRef }: { outerListRef: HTMLElement | null}) {
     const [scrolbarWidth, setScrollbarWidth] = useState(0);
+   
     useEffect(() => {
-        console.log(outerListRef);
-        if (!outerListRef.current) return;
+        if (!outerListRef) return;
 
         const resizeObserver = new ResizeObserver(entries => {
             for (let entry of entries) {
-                if (entry.target === outerListRef.current) {
-                    setScrollbarWidth(getVerticalScrollbarWidth(outerListRef.current as HTMLElement))
+                if (entry.target === outerListRef) {
+                    setScrollbarWidth(getVerticalScrollbarWidth(outerListRef as HTMLElement))
 
                 }
             }
         });
 
-        resizeObserver.observe(outerListRef.current);
+        resizeObserver.observe(outerListRef);
 
         return () => {
-            if (outerListRef.current) {
-                resizeObserver.unobserve(outerListRef.current);
+            if (outerListRef) {
+                resizeObserver.unobserve(outerListRef);
             }
         };
     }, []);
+
     return [
         scrolbarWidth
     ]

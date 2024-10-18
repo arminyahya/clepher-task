@@ -1,5 +1,5 @@
 import React from 'react';
-import { ColumnType } from '../table-no-react-window';
+import { ColumnType } from '../basicTable';
 
 // Define the type for the data items
 interface Item {

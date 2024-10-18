@@ -14,5 +14,5 @@ export const stockSymbols: { title: string; value: StockSymbolType }[] = [
         value: 'AMD'
     }
 ];
-
 export const paginationSize = 10;
+export const virtualizedTableRowHeight = 35;

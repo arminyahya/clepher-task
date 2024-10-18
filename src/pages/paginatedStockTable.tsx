@@ -1,11 +1,10 @@
 import React, { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
 import { getStocks } from '../utils/services';
 import Dropdown from '../components/ui/dropdown';
-import Table from '../components/ui/table-with-pagination';
+import Table from '../components/ui/paginatedTable';
 import { StockSymbolType } from '../types';
-import SimplePagination from '../components/ui/pagination';
 
-export default function PaginationStockTable() {
+export default function PaginatedStockTable() {
     const [data, setData] = useState<any>([]);
     const [selectedSymbol, setSelectedSymbol] = useState<StockSymbolType>('IBM');
     const [loading, setLoading] = useState(true);
@@ -57,8 +56,10 @@ export default function PaginationStockTable() {
 
     return (
         <div className={`w-full h-full `} >
-            <h1 className='text-2xl font-bold inline-block mx-4'>Time Series (5min) For </h1>
-            <Dropdown defaultValue={'IBM'} options={['IBM', 'AAPL']} onSelect={handleSymbolChange} className='my-4 rounded-md' />
+            <div className='w-full h-18'>
+                <h1 className='text-2xl font-bold inline-block mx-4'>Time Series (5min) For </h1>
+                <Dropdown defaultValue={'IBM'} options={['IBM', 'AAPL']} onSelect={handleSymbolChange} className='my-4 rounded-md' />
+            </div>
             <Table columns={columns} data={defferedValue} className={loading ? 'opacity-50' : 'opacity-100'} height={400} />
         </div>
     )

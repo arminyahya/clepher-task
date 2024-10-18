@@ -1,7 +1,7 @@
 import React, { memo, useMemo, useRef, useState } from 'react';
-import { paginationSize } from '../../../utils/constants';
-import useVerticalScrollbarMeasure from '../../../hooks/useVerticalScrollbarMeasure';
-import Pagination from '../pagination';
+import { paginationSize } from '../../utils/constants';
+import useVerticalScrollbarMeasure from '../../hooks/useVerticalScrollbarMeasure';
+import Pagination from './pagination';
 
 export interface ColumnType {
     dataIndex: string;
@@ -19,7 +19,7 @@ interface Props {
 function Table(props: Props) {
     const { columns, data, height } = props;
     const outerListRef = useRef<HTMLDivElement>(null);
-    const [scrolbarWidth] = useVerticalScrollbarMeasure({ outerListRef: outerListRef as any });
+    const [scrolbarWidth] = useVerticalScrollbarMeasure({ outerListRef: outerListRef.current });
     const [currentPage, setCurrentPage] = useState(1);
     const pages = useMemo(() => {
         setCurrentPage(1);

@@ -1,5 +1,4 @@
 export default function getVerticalScrollbarWidth(element: HTMLElement): number {
-    console.log(element)
     if(!element) {
         return 0
     }
