@@ -19,7 +19,6 @@ function Table(props: Props) {
     const { columns, data, className} = props;
     const outerListRef = useRef<HTMLDivElement>(null);
     const [scrolbarWidth] = useVerticalScrollbarMeasure({ outerListRef: outerListRef });
-    console.log(scrolbarWidth);
     const { height, width } = useAutoSizer({ outerListRef: outerListRef.current });
     return (
         <div className={"w-full flex-1 overflow-x-auto bg-white " + className}>

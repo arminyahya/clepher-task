@@ -1,14 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { ColumnType } from '../basicTable';
 
-// Define the type for the data items
-interface Item {
-    id: number;
-    name: string;
-    value: string;
-}
-
-// Define the props for the Row component
 interface RowProps {
     index: number;
     style: React.CSSProperties;
@@ -16,8 +8,6 @@ interface RowProps {
     columns: ColumnType[];
 
 }
-
-// Row component to render each row of the table
 const Row: React.FC<RowProps> = ({ index, style, data, columns }) => {
     const d = data[index];
     return (
@@ -30,4 +20,4 @@ const Row: React.FC<RowProps> = ({ index, style, data, columns }) => {
     );
 }
 
-export default Row;
+export default memo(Row) ;

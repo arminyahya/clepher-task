@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <LayoutContainer />,
     children: [
-      { index: true, element: <SimpleStockTable /> },
+      { path: '/', element: <SimpleStockTable /> },
       { path: '/virtualized', element: <VirtualizedStockTable /> },
       { path: '/pagination', element: <PaginationStockTable /> },
 

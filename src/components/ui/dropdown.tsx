@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 
 interface DropdownProps {
     defaultValue: string;
@@ -66,4 +66,4 @@ const Dropdown: React.FC<DropdownProps> = ({ defaultValue, options, onSelect, cl
     );
 };
 
-export default Dropdown;
+export default memo(Dropdown);

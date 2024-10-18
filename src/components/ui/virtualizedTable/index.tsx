@@ -1,10 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { FixedSizeList as List } from 'react-window';
 import Row from './row';
 import { ColumnType } from '../basicTable';
 import useVerticalScrollbarMeasure from '../../../hooks/useVerticalScrollbarMeasure';
 import useAutoSizer from '../../../hooks/useAutoSizer';
-import { virtualizedTableRowHeight } from '../../../utils/constants';
+import { virtualizedTableRowHeight } from '../../../constants/style';
 
 interface VirtualizedTableProps {
     columns: ColumnType[];
@@ -42,4 +42,4 @@ const VirtualizedTable: React.FC<VirtualizedTableProps> = ({ data, columns, clas
 };
 
 
-export default VirtualizedTable;
+export default memo(VirtualizedTable);

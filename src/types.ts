@@ -1,1 +1,2 @@
-export type StockSymbolType = 'IBM' | 'AAPL' | 'AMD';
+
+export type StockSymbol = 'IBM' | 'AAPL' | 'AMD';

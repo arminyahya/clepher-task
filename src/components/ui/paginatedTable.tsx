@@ -1,7 +1,7 @@
 import React, { memo, useMemo, useRef, useState } from 'react';
-import { paginationSize } from '../../utils/constants';
 import useVerticalScrollbarMeasure from '../../hooks/useVerticalScrollbarMeasure';
 import Pagination from './pagination';
+import { paginationSize } from '../../constants/style';
 
 export interface ColumnType {
     dataIndex: string;
@@ -36,11 +36,11 @@ function Table(props: Props) {
     return (
         <div className="overflow-hidden h-full">
             <div className='bg-white overflow-hidden'>
-                <table className="w-full ">
+                <table key='table-for-headers' className="w-full">
                     <thead className="bg-gray-100">
                         <tr className='flex w-full'>
                             {columns.map(col => (
-                                <th className="flex-1 py-2 px-4 border-b text-left font-medium">{col.title}</th>
+                                <th key={col.dataIndex} className="flex-1 py-2 px-4 border-b text-left font-medium">{col.title}</th>
                             ))}
                             <th style={{ width: scrolbarWidth }}></th>
                         </tr>
@@ -48,13 +48,13 @@ function Table(props: Props) {
                 </table>
             </div>
             <div className={`overflow-y-auto h-[${height}px]`} ref={outerListRef}>
-                <table className="bg-white h-full w-full overflow-hidden">
+                <table key='table-for-data' className="bg-white h-full w-full overflow-hidden">
                     <tbody >
                         {
-                            currentPageData.map(d => (
-                                <tr className='flex w-full'>
+                            currentPageData.map((d, index) => (
+                                <tr key={index} className='flex w-full'>
                                     {columns.map(col => (
-                                        <td className="flex-1 py-2 px-4 border-b text-left truncate">{col.renderer ? col.renderer({ item: d }) : d[col.dataIndex] as string}</td>
+                                        <td key={col.dataIndex} className="flex-1 py-2 px-4 border-b text-left truncate">{col.renderer ? col.renderer({ item: d }) : d[col.dataIndex] as string}</td>
 
                                     ))}
                                 </tr>

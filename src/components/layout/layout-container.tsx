@@ -1,19 +1,13 @@
-import React from 'react';
+import React, { memo, useMemo } from 'react';
 import Tabs from './tabs';
+import layoutTabs from '../../constants/layoutTabs';
 
 const LayoutContainer = () => {
-    const tabs = [
-        { to: '/', label: 'Simple' },
-        { to: '/virtualized', label: 'Virtualized' },
-        { to: '/pagination', label: 'Pagination' },
-
-    ];
-
     return (
         <div className="container mx-auto py-8 h-full w-full">
-            <Tabs tabs={tabs} />
+            <Tabs tabs={layoutTabs} />
         </div>
     );
 };
 
-export default LayoutContainer;
+export default memo(LayoutContainer);

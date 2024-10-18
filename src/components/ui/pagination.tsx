@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo, useMemo } from 'react'
 
 interface PaginationProps {
   currentPage: number
@@ -6,11 +6,10 @@ interface PaginationProps {
   onPageChange: (page: number) => void
 }
 
-export default function Pagination({ currentPage = 1, totalPages = 5, onPageChange }: PaginationProps) {
-  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1)
-
+function Pagination({ currentPage = 1, totalPages = 5, onPageChange }: PaginationProps) {
+  const pageNumbers = useMemo(() =>  Array.from({ length: totalPages }, (_, i) => i + 1), [totalPages]);
   return (
-    <div className="flex items-center justify-center space-x-2 mt-4">
+    <div className="flex items-center space-x-2 mt-4 overflow-x-auto">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -41,3 +40,5 @@ export default function Pagination({ currentPage = 1, totalPages = 5, onPageChan
     </div>
   )
 }
+
+export default memo(Pagination);

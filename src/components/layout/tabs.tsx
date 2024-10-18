@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { memo, Suspense } from 'react';
 import Tab from './tab';
 import { Outlet } from 'react-router-dom';
 
@@ -23,4 +23,4 @@ interface TabsProps {
   );
 };
 
-export default Tabs;
+export default memo(Tabs);
