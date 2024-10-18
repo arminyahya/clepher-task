@@ -26,13 +26,13 @@ interface TabsProps {
 
 export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
   return (
-    <div className="w-full h-full">
-      <div className="flex border-b border-gray-200">
+    <div className="w-full h-full flex flex-col">
+      <div className="flex border-b border-gray-200 h-10">
         {tabs.map((tab, index) => (
           <Tab key={index} to={tab.to} label={tab.label} />
         ))}
       </div>
-      <div className="p-4 bg-white rounded-b-lg h-full w-full">
+      <div className="p-4 bg-white rounded-b-lg flex-1">
         <Suspense fallback={<div>Loading...</div>}>
           <Outlet />
         </Suspense>

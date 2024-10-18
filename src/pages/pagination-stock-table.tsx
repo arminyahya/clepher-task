@@ -1,10 +1,11 @@
 import React, { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
 import { getStocks } from '../utils/services';
 import Dropdown from '../components/ui/dropdown';
-import VirtualizedTable from '../components/ui/table';
+import Table from '../components/ui/table-with-pagination';
 import { StockSymbolType } from '../types';
+import SimplePagination from '../components/ui/pagination';
 
-export default function VirtualizedStockTable() {
+export default function PaginationStockTable() {
     const [data, setData] = useState<any>([]);
     const [selectedSymbol, setSelectedSymbol] = useState<StockSymbolType>('IBM');
     const [loading, setLoading] = useState(true);
@@ -58,7 +59,7 @@ export default function VirtualizedStockTable() {
         <div className={`w-full h-full `} >
             <h1 className='text-2xl font-bold inline-block mx-4'>Time Series (5min) For </h1>
             <Dropdown defaultValue={'IBM'} options={['IBM', 'AAPL']} onSelect={handleSymbolChange} className='my-4 rounded-md' />
-            <VirtualizedTable columns={columns} data={defferedValue} className={loading ? 'opacity-50' : 'opacity-100'} />
+            <Table columns={columns} data={defferedValue} className={loading ? 'opacity-50' : 'opacity-100'} height={400} />
         </div>
     )
 }

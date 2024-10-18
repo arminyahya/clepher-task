@@ -10,7 +10,8 @@ import { lazy } from "react";
 import LayoutContainer from "../components/layout/layout-container";
 
 const SimpleStockTable = lazy(() => import('../pages/simple-stock-table'));
-const VirtualizedStockTable = lazy(() => import('../pages/virtualized-stock-tablels'));
+const VirtualizedStockTable = lazy(() => import('../pages/virtualized-stock-table'));
+const PaginationStockTable = lazy(() => import('../pages/pagination-stock-table'));
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,8 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <SimpleStockTable /> },
       { path: '/virtualized', element: <VirtualizedStockTable /> },
+      { path: '/pagination', element: <PaginationStockTable /> },
+
     ],
   },
 ]);

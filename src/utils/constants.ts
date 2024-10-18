@@ -13,4 +13,6 @@ export const stockSymbols: { title: string; value: StockSymbolType }[] = [
         title: 'AMD',
         value: 'AMD'
     }
-]
+];
+
+export const paginationSize = 10;

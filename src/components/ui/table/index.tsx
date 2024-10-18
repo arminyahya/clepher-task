@@ -19,8 +19,7 @@ const VirtualizedTable: React.FC<VirtualizedTableProps> = ({ data, columns, clas
     const [scrolbarWidth] = useVerticalScrollbarMeasure({ outerListRef: outerListRef as any});
 
     return (
-        <div className={"w-full h-full overflow-x-auto " + className} >
-            <div className="min-w-full bg-white" style={{ height: '100%', width: '100%' }}>
+            <div className={"w-full flex-1 overflow-x-auto bg-white " + className}>
                 <div className="bg-gray-100">
                     <div className='flex w-full'>
                         {columns.map(col => (
@@ -44,7 +43,6 @@ const VirtualizedTable: React.FC<VirtualizedTableProps> = ({ data, columns, clas
                         </List>)}
                 </AutoSizer>
             </div>
-        </div>
     );
 };
 
