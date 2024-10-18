@@ -4,6 +4,7 @@ import Dropdown from '../components/ui/dropdown';
 import VirtualizedTable from '../components/ui/virtualizedTable';
 import { StockSymbol } from '../types';
 import stockTableColumns from '../constants/stockTableColumns';
+import { stockSymbols } from '../constants/stockSymbols';
 
 export default function VirtualizedStockTable() {
     const [data, setData] = useState<any>([]);
@@ -32,7 +33,7 @@ export default function VirtualizedStockTable() {
         <div className={`w-full h-full flex flex-col`} >
             <div className='w-full h-18'>
                 <h1 className='text-2xl font-bold inline-block mx-4'>Time Series (5min) For </h1>
-                <Dropdown defaultValue={'IBM'} options={['IBM', 'AAPL']} onSelect={handleSymbolChange} className='my-4 rounded-md' />
+                <Dropdown defaultValue={'IBM'} options={stockSymbols} onSelect={handleSymbolChange} className='my-4 rounded-md' />
             </div>
             <VirtualizedTable columns={stockTableColumns} data={defferedValue} className={loading ? 'opacity-50' : 'opacity-100'} />
         </div>

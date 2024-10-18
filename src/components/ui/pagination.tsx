@@ -9,7 +9,7 @@ interface PaginationProps {
 function Pagination({ currentPage = 1, totalPages = 5, onPageChange }: PaginationProps) {
   const pageNumbers = useMemo(() =>  Array.from({ length: totalPages }, (_, i) => i + 1), [totalPages]);
   return (
-    <div className="flex items-center space-x-2 mt-4 overflow-x-auto">
+    <div className="flex items-center space-x-2 mt-4 overflow-x-auto justify-center flex-wrap">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}

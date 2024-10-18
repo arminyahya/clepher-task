@@ -1,7 +1,7 @@
 import React, { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
 import { getStocks } from '../utils/services';
 import Dropdown from '../components/ui/dropdown';
-import Table from '../components/ui/paginatedTable';
+import PaginatedTable from '../components/ui/paginatedTable';
 import { StockSymbol } from '../types';
 import stockTableColumns from '../constants/stockTableColumns';
 import { stockSymbols } from '../constants/stockSymbols';
@@ -35,7 +35,7 @@ export default function PaginatedStockTable() {
                 <h1 className='text-2xl font-bold inline-block mx-4'>Time Series (5min) For </h1>
                 <Dropdown defaultValue={'IBM'} options={stockSymbols} onSelect={handleSymbolChange} className='my-4 rounded-md' />
             </div>
-            <Table columns={stockTableColumns} data={defferedValue} className={loading ? 'opacity-50' : 'opacity-100'} height={400} />
+            <PaginatedTable columns={stockTableColumns} data={defferedValue} className={loading ? 'opacity-50' : 'opacity-100'} height={400} />
         </div>
     )
 }

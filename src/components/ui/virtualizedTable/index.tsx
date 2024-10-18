@@ -4,7 +4,7 @@ import Row from './row';
 import { ColumnType } from '../basicTable';
 import useVerticalScrollbarMeasure from '../../../hooks/useVerticalScrollbarMeasure';
 import useAutoSizer from '../../../hooks/useAutoSizer';
-import { virtualizedTableRowHeight } from '../../../constants/style';
+import { virtualizedTableHeadersHeight, virtualizedTableRowHeight } from '../../../constants/style';
 
 interface VirtualizedTableProps {
     columns: ColumnType[];
@@ -14,9 +14,9 @@ interface VirtualizedTableProps {
 
 const VirtualizedTable: React.FC<VirtualizedTableProps> = ({ data, columns, className }) => {
     const itemCount = data.length;
-    const outerListRef = useRef<HTMLElement>(null);
-    const [scrolbarWidth] = useVerticalScrollbarMeasure({ outerListRef: outerListRef });
-    const { height, width } = useAutoSizer({ outerListRef: outerListRef.current });
+    const listRef = useRef<HTMLElement>(null);
+    const [scrolbarWidth] = useVerticalScrollbarMeasure({ listRef });
+    const { height, width } = useAutoSizer({ listRef });
     return (
         <div className={"w-full flex-1 overflow-x-auto bg-white " + className}>
             <div className="bg-gray-100 h-[40px]">
@@ -28,12 +28,11 @@ const VirtualizedTable: React.FC<VirtualizedTableProps> = ({ data, columns, clas
                 </div>
             </div>
             <List
-                height={height - 40}
+                height={height - virtualizedTableHeadersHeight}
                 itemCount={itemCount}
                 itemSize={virtualizedTableRowHeight}
                 width={width}
-                outerRef={outerListRef}
-
+                outerRef={listRef}
             >
                 {({ index, style }) => <Row index={index} style={style} data={data} columns={columns} />}
             </List>

@@ -16,10 +16,10 @@ interface Props {
 }
 
 function Table(props: Props) {
-    const { columns, data, className} = props;
-    const outerListRef = useRef<HTMLDivElement>(null);
-    const [scrolbarWidth] = useVerticalScrollbarMeasure({ outerListRef: outerListRef });
-    const { height, width } = useAutoSizer({ outerListRef: outerListRef.current });
+    const { columns, data, className } = props;
+    const listRef = useRef<HTMLDivElement>(null);
+    const [scrolbarWidth] = useVerticalScrollbarMeasure({ listRef });
+    const { height, width } = useAutoSizer({ listRef });
     return (
         <div className={"w-full flex-1 overflow-x-auto bg-white " + className}>
             <div className='bg-white overflow-hidden h-[40px]'>
@@ -34,7 +34,7 @@ function Table(props: Props) {
                     </thead>
                 </table>
             </div>
-            <div className={`overflow-y-auto`} style={{ height: height - 40, width }} ref={outerListRef}>
+            <div className={`overflow-y-auto`} style={{ height: height - 40, width }} ref={listRef}>
                 <table className="bg-white h-full w-full overflow-hidden">
                     <tbody>
                         {

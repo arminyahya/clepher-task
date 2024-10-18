@@ -16,17 +16,16 @@ interface Props {
     height: number;
 }
 
-function Table(props: Props) {
-    const { columns, data, height } = props;
-    const outerListRef = useRef<HTMLDivElement>(null);
-    const [scrolbarWidth] = useVerticalScrollbarMeasure({ outerListRef: outerListRef });
+function PaginatedTable(props: Props) {
+    const { columns, data, height, className } = props;
+    const listRef = useRef<HTMLDivElement>(null);
+    const [scrolbarWidth] = useVerticalScrollbarMeasure({ listRef });
     const [currentPage, setCurrentPage] = useState(1);
     const pages = useMemo(() => {
         setCurrentPage(1);
         const m = new Map();
         for (let i = 0; i <= Math.ceil(data.length / paginationSize); i++) {
             m.set(i + 1, data.slice(i * paginationSize, (i * paginationSize) + paginationSize))
-
         }
         return m;
     }, [data]);
@@ -34,7 +33,7 @@ function Table(props: Props) {
     const currentPageData: any[] = pages ? pages.get(currentPage) : [];
 
     return (
-        <div className="overflow-hidden h-full">
+        <div className={"overflow-hidden h-full " + className}>
             <div className='bg-white overflow-hidden'>
                 <table key='table-for-headers' className="w-full">
                     <thead className="bg-gray-100">
@@ -47,7 +46,7 @@ function Table(props: Props) {
                     </thead>
                 </table>
             </div>
-            <div className={`overflow-y-auto h-[${height}px]`} ref={outerListRef}>
+            <div className={`overflow-y-auto h-[${height}px]`} ref={listRef}>
                 <table key='table-for-data' className="bg-white h-full w-full overflow-hidden">
                     <tbody >
                         {
@@ -68,4 +67,4 @@ function Table(props: Props) {
     )
 }
 
-export default memo(Table);
+export default memo(PaginatedTable);

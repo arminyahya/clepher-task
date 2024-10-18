@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-const useAutoSizer = ({ outerListRef }: { outerListRef: HTMLElement | null}) => {
+const useAutoSizer = ({ listRef }: { listRef: React.RefObject<HTMLElement | null>}) => {
     const [size, setSize] = useState({ width: 0, height: 0 });
 
     useEffect(() => {
-        const element = outerListRef;
-
+        const element = listRef.current;
         if (!element || !element.parentElement) return;
-        console.log(element.parentElement)
+        
         const updateSize = () => {
             const parent = element.parentElement;
 
@@ -28,7 +27,7 @@ const useAutoSizer = ({ outerListRef }: { outerListRef: HTMLElement | null}) => 
         return () => {
             resizeObserver.unobserve(element.parentElement as HTMLElement);
         };
-    }, [outerListRef]);
+    }, [listRef]);
 
     return size;
 };
