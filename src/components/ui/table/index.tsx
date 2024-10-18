@@ -4,6 +4,7 @@ import Row from './row';
 import { ColumnType } from '../table-no-react-window';
 import { AutoSizer } from 'react-virtualized';
 import getVerticalScrollbarWidth from '../../../utils/getVerticalScrollbarWidth';
+import useVerticalScrollbarMeasure from '../../../hooks/useVerticalScrollbarMeasure';
 
 interface VirtualizedTableProps {
     columns: ColumnType[];
@@ -15,28 +16,7 @@ const VirtualizedTable: React.FC<VirtualizedTableProps> = ({ data, columns, clas
     const rowHeight = 35;
     const itemCount = data.length;
     const outerListRef = useRef<HTMLDivElement>(null);
-    const [scrolbarWidth, setScrollbarWidth] = useState(0);
-
-    useEffect(() => {
-        if (!outerListRef.current) return;
-    
-        const resizeObserver = new ResizeObserver(entries => {
-          for (let entry of entries) {
-            if (entry.target === outerListRef.current) {
-                setScrollbarWidth(getVerticalScrollbarWidth(outerListRef.current as HTMLElement))
-
-            }
-          }
-        });
-    
-        resizeObserver.observe(outerListRef.current);
-    
-        return () => {
-          if (outerListRef.current) {
-            resizeObserver.unobserve(outerListRef.current);
-          }
-        };
-      }, []);
+    const [scrolbarWidth] = useVerticalScrollbarMeasure({ outerListRef: outerListRef as any});
 
     return (
         <div className={"w-full h-full overflow-x-auto " + className} >
