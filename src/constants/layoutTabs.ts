@@ -1,6 +1,6 @@
 const layoutTabs = [
-    { to: '/', label: 'Simple' },
+    { to: '/', label: 'Basic' },
     { to: '/virtualized', label: 'Virtualized' },
-    { to: '/pagination', label: 'Pagination' },
+    { to: '/paginated', label: 'Paginated' },
 ];
 export default layoutTabs;
