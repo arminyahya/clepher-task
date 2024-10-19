@@ -2,25 +2,32 @@ import React, { useCallback, useDeferredValue, useEffect, useMemo, useRef, useSt
 import { getStocks } from '../utils/services';
 import Dropdown from '../components/ui/dropdown';
 import VirtualizedTable from '../components/ui/virtualizedTable';
-import { StockSymbol } from '../types';
+import { StockData, StockSymbol } from '../types';
 import stockTableColumns from '../constants/stockTableColumns';
 import { stockSymbols } from '../constants/stockSymbols';
+import { RequestLimitMessage } from '../constants/errorMessages';
 
 export default function VirtualizedStockTable() {
     const [data, setData] = useState<any>([]);
     const [selectedSymbol, setSelectedSymbol] = useState<StockSymbol>('IBM');
     const [loading, setLoading] = useState(true);
     const defferedValue = useDeferredValue(data)
+    const [error, setError] = useState('');
 
     useEffect(() => {
         (async () => {
             const result = await getStocks({ selectedSymbol });
-            setLoading(false);
-            setData(Object.entries(result['Time Series (5min)']).map(([timestamp, values]) => ({
-                timestamp,
-                ...values as any
+            if (result['Time Series (5min)']) {
+                setLoading(false);
+                setError('')
+                setData(Object.entries<Omit<StockData, "timestamp">>(result['Time Series (5min)']).map(([timestamp, values]) => ({
+                    timestamp,
+                    ...values
+                }
+                )));
+            } else {
+                setError(RequestLimitMessage);
             }
-            )));
         })()
     }, [selectedSymbol]);
 
@@ -31,6 +38,7 @@ export default function VirtualizedStockTable() {
 
     return (
         <div className={`w-full h-full flex flex-col`} >
+            {error}
             <div className='w-full h-18'>
                 <h1 className='text-2xl font-bold inline-block mx-4'>Time Series (5min) For </h1>
                 <Dropdown defaultValue={'IBM'} options={stockSymbols} onSelect={handleSymbolChange} className='my-4 rounded-md' />

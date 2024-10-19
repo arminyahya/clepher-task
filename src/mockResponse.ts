@@ -11,7 +11,7 @@ longMockResponse["Meta Data"] =  {
     "6. Time Zone": "US/Eastern"
 };
 
-for(let i=0; i<=1000; i++) {
+for(let i=0; i<=5; i++) {
     longMockResponse["Time Series (5min)"][i.toString()] ={
         "1. open": "233.0100",
         "2. high": "233.0100",

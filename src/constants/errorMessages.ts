@@ -1,0 +1,1 @@
+export const RequestLimitMessage = 'Alpha Vantage API request is limited to 25 per day. Please subscribe to any of the premium plans';
